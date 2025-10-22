@@ -8,29 +8,45 @@ It allows the assistant to display external content, such as websites, documents
 ## 🏗️ Architecture Overview
 
 app/
-├─ layout.tsx → Global server layout (auth, sidebar, data providers)
 │
-app/(chat)/
-├─ layout.tsx → Chat module server layout (loads sidebar, pyodide script)
-├─ ChatSplitView.tsx → Client layout shell (splits Chat ↔ Artifact)
-│ Handles responsive transitions and animation logic
+├─ layout.tsx
+│ → 🌐 Global server layout (auth, sidebar, data providers)
 │
-app/(chat)/chat/
-├─ page.tsx → Server component (fetches chat data, messages, model, session)
-├─ ChatClient.tsx → Client chat logic (renders <Chat /> + DataStreamHandler)
+├─ (chat)/
+│ ├─ layout.tsx
+│ │ → ⚙️ Chat module server layout (loads sidebar, pyodide script)
+│ │
+│ ├─ ChatSplitView.tsx
+│ │ → 💡 Client layout shell (splits Chat ↔ Artifact)
+│ │ Handles responsive transitions and animation logic
+│ │
+│ └─ chat/
+│ ├─ page.tsx
+│ │ → 🧠 Server component (fetches chat data, messages, model, session)
+│ │
+│ └─ ChatClient.tsx
+│ → 💬 Client chat logic (renders <Chat /> + DataStreamHandler)
 │
-app/components/
-├─ elements/
-│ └─ message.tsx → Handles message rendering and link interception
-│ (opens artifact when clicking AI-generated links)
+├─ components/
+│ ├─ elements/
+│ │ └─ message.tsx
+│ │ → 🪄 Handles message rendering and link interception
+│ │ (opens artifact when clicking AI-generated links)
+│ │
+│ └─ artifact/
+│ ├─ hooks/use-artifact.ts
+│ │ → 🧩 Global artifact store (Zustand)
+│ │
+│ ├─ ArtifactRenderer.tsx
+│ │ → 🎛️ Chooses which artifact type to render (Webview, etc.)
+│ │
+│ └─ WebviewArtifact.tsx
+│ → 🌍 Renders live web previews with Framer Motion
 │
-└─ artifact/
-├─ hooks/use-artifact.ts → Global artifact store (Zustand)
-├─ ArtifactRenderer.tsx → Chooses which artifact type to render (Webview, etc.)
-└─ WebviewArtifact.tsx → Renders live web previews with Framer Motion
-│
-src/types/
-└─ ai-elements.d.ts → Type declarations for ai-elements WebPreview component
+└─ src/
+└─ types/
+└─ ai-elements.d.ts
+→ 🧾 Type declarations for ai-elements WebPreview component
 
 ---
 
