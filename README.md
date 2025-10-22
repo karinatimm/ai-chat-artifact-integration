@@ -7,47 +7,48 @@ It allows the assistant to display external content, such as websites, documents
 
 ## 🏗️ Architecture Overview
 
+````plaintext
 app/
 │
 ├─ layout.tsx
-│ → 🌐 Global server layout (auth, sidebar, data providers)
+│ → Global server layout (auth, sidebar, data providers)
 │
 ├─ (chat)/
 │ ├─ layout.tsx
-│ │ → ⚙️ Chat module server layout (loads sidebar, pyodide script)
+│ │ → Chat module server layout (loads sidebar, pyodide script)
 │ │
 │ ├─ ChatSplitView.tsx
-│ │ → 💡 Client layout shell (splits Chat ↔ Artifact)
+│ │ → Client layout shell (splits Chat ↔ Artifact)
 │ │ Handles responsive transitions and animation logic
 │ │
 │ └─ chat/
 │ ├─ page.tsx
-│ │ → 🧠 Server component (fetches chat data, messages, model, session)
+│ │ → Server component (fetches chat data, messages, model, session)
 │ │
 │ └─ ChatClient.tsx
-│ → 💬 Client chat logic (renders <Chat /> + DataStreamHandler)
+│ → Client chat logic (renders <Chat /> + DataStreamHandler)
 │
 ├─ components/
 │ ├─ elements/
 │ │ └─ message.tsx
-│ │ → 🪄 Handles message rendering and link interception
+│ │ → Handles message rendering and link interception
 │ │ (opens artifact when clicking AI-generated links)
 │ │
 │ └─ artifact/
 │ ├─ hooks/use-artifact.ts
-│ │ → 🧩 Global artifact store (Zustand)
+│ │ → Global artifact store (Zustand)
 │ │
 │ ├─ ArtifactRenderer.tsx
-│ │ → 🎛️ Chooses which artifact type to render (Webview, etc.)
+│ │ → Chooses which artifact type to render (Webview, etc.)
 │ │
 │ └─ WebviewArtifact.tsx
-│ → 🌍 Renders live web previews with Framer Motion
+│ → Renders live web previews with Framer Motion
 │
 └─ src/
 └─ types/
 └─ ai-elements.d.ts
-→ 🧾 Type declarations for ai-elements WebPreview component
-
+→ Type declarations for ai-elements WebPreview component
+```
 ---
 
 ### Why This Structure
@@ -64,12 +65,12 @@ When I was refactoring the project, my main goal was to **separate server logic 
 - UI rendering, real-time updates, and user interactions.
 - Framer Motion animations for smooth transitions (will be improved in future).
 
-**Zustand global state** manages communication between chat and artifact UIs,  
+**Zustand global state** manages communication between chat and artifact UIs,
 so the chat doesn’t need to know _what_ artifact is displayed, it just triggers it.
 
 ---
 
-Each component below plays a specific role in the local-only artifact system required for the trial task.  
+Each component below plays a specific role in the local-only artifact system required for the trial task.
 This ensures that all functionality (link interception, webview rendering, layout animation) happens purely on the client, without any database persistence.
 
 ## ⚙️ Component Responsibilities
@@ -182,3 +183,4 @@ This ensures that all functionality (link interception, webview rendering, layou
   - Visually styled with a dark gradient background and glass header.
 
 ---
+````
