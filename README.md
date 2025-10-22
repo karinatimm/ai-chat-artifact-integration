@@ -1,4 +1,4 @@
-# 🧠 Chat Artifact Integration — Overview
+# Chat Artifact Integration — Overview
 
 This update introduces a **modular Artifact rendering system** into the chat experience.  
 It allows the assistant to display external content, such as websites, documents, or code previews — directly inside the chat interface, without leaving the page.
