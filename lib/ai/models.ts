@@ -1,0 +1,42 @@
+export const DEFAULT_CHAT_MODEL: string = "chat-model";
+
+export type ChatModel = {
+  id: string;
+  name: string;
+  description: string;
+};
+
+export const chatModels: ChatModel[] = [
+  {
+    id: "chat-model",
+    name: "GPT-4o Mini",
+    description: "Lightweight, fast model ideal for real-time chat and reasoning.",
+  },
+  {
+    id: "chat-model-reasoning",
+    name: "GPT-4o",
+    description: "Advanced reasoning model for complex multi-step questions.",
+  },
+];
+
+// export const DEFAULT_CHAT_MODEL: string = "chat-model";
+
+// export type ChatModel = {
+//   id: string;
+//   name: string;
+//   description: string;
+// };
+
+// export const chatModels: ChatModel[] = [
+//   {
+//     id: "chat-model",
+//     name: "Grok Vision",
+//     description: "Advanced multimodal model with vision and text capabilities",
+//   },
+//   {
+//     id: "chat-model-reasoning",
+//     name: "Grok Reasoning",
+//     description:
+//       "Uses advanced chain-of-thought reasoning for complex problems",
+//   },
+// ];
